@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 28
     defaultConfig {
         applicationId "fi.tuni.work_time_tracker"
         minSdkVersion 27
