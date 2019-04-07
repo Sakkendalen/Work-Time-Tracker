@@ -71,8 +71,36 @@ public class MainActivity extends AppCompatActivity {
         // Inserting WorkHour
         Log.d("WorkHourDebug: ", "Inserting ..");
         db.addWorkHours(new WorkHour(date.getText().toString(), hours.getText().toString()));
+    }
+
+    public void delHour(String date){
+
+        List<WorkHour> contacts = db.getAllWorkHours();
+
+        for (WorkHour cn : contacts) {
+            if(cn.getDay().equals(date)) {
+                Log.d("DeleteHours:", "Deleting" + cn.getID() + " " + cn.getDay() + " " + cn.getHours() );
+                db.deleteWorkHour(cn);
+            }
+        }
 
     }
+
+    public void alterHour(String date, String hour){
+
+        List<WorkHour> contacts = db.getAllWorkHours();
+
+        for (WorkHour cn : contacts) {
+            if(cn.getDay().equals(date)) {
+                Log.d("Altering:", "Altering" + cn.getID() + " " + cn.getDay() + " " + cn.getHours() );
+                cn.setDay(date);
+                cn.setHours(hour);
+                db.updateWorkHour(cn);
+            }
+        }
+
+    }
+
     public void fetchHours(String date){
 
         fetchedHours = (TextView) findViewById(R.id.fetchedHours);

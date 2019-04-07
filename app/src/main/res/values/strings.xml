@@ -4,4 +4,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="save">Save</string>
     <string name="insert_hours">Insert Hours</string>
+    <string name="EditHours">Edit Hours</string>
+    <string name="delHours">Delete Hours</string>
 </resources>

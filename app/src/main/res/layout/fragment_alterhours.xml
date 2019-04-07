@@ -8,17 +8,49 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:textSize="25sp"
-        android:text="Tab3"
-        android:id="@+id/textTab3"/>
+        android:layout_marginTop="15dp"
+        android:text="Insert Date" />
 
-    <Button
+    <EditText
+        android:id="@+id/dateAlter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/btnTEST3"
-        android:text="TESTBTN 3"/>
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/insert_hours" />
+
+    <EditText
+        android:id="@+id/hoursAlter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="time" />
+
+    <Button
+        android:id="@+id/alterBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/EditHours" />
+
+    <Button
+        android:id="@+id/delHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/delHours" />
 
 </LinearLayout>
