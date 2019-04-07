@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:text="Insert Hours" />
+        android:text="@string/insert_hours" />
 
     <EditText
         android:id="@+id/hours"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:text="Save"
+        android:text="@string/save"
         android:onClick="saveHours"/>
 
 </LinearLayout>

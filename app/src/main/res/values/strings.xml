@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Work-Time_Tracker</string>
+    <string name="app_name">Work Time Tracker</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="save">Save</string>
+    <string name="insert_hours">Insert Hours</string>
 </resources>
