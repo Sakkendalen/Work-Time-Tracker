@@ -8,9 +8,20 @@
     <!-- CalendarView with monday first day-->
     <CalendarView
         android:id="@+id/simpleCalendarView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:firstDayOfWeek="2"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:firstDayOfWeek="2" />
+
+    <TextView
+        android:id="@+id/fetchedHours"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/simpleCalendarView"
+        android:layout_centerVertical="true" />
 
 
 </RelativeLayout>

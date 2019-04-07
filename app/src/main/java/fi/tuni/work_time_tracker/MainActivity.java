@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText hours;
     private EditText date;
     private DatabaseHandler db;
+    private TextView fetchedHours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +72,26 @@ public class MainActivity extends AppCompatActivity {
         Log.d("WorkHourDebug: ", "Inserting ..");
         db.addWorkHours(new WorkHour(date.getText().toString(), hours.getText().toString()));
 
-        // Reading all workhours
-        Log.d("WorkHourDebug: ", "Reading all contacts..");
+    }
+    public void fetchHours(String date){
+
+        fetchedHours = (TextView) findViewById(R.id.fetchedHours);
+        fetchedHours.setText("");
+
+        // get all workhours
         List<WorkHour> contacts = db.getAllWorkHours();
+        int total = 0;
 
+        //check if given date mathces with inserted hours
         for (WorkHour cn : contacts) {
-            String log = "WorkHourDebug: " + cn.getID() + " ,Date: " + cn.getDay() + " ,Hours: " +
-                    cn.getHours();
-            // Writing WorkHours to log
-            Log.d("WorkHourDebug: ", log);
-
+            if(cn.getDay().equals(date)){
+                total += Integer.parseInt(cn.getHours());
+            }
         }
+
+        //Display sum of given date workhours below CalendarView
+        fetchedHours.append(date);
+        String show = "\nTotal Hours: " + total;
+        fetchedHours.append(show);
     }
 }
