@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,8 +22,9 @@ public class AlterHoursFragment extends Fragment {
 
     private Button btnAlter;
     private Button btnDelete;
-    private EditText date;
+    private DatePicker date;
     private EditText hours;
+    private EditText comment;
 
     @Nullable
     @Override
@@ -33,10 +35,12 @@ public class AlterHoursFragment extends Fragment {
         btnDelete = view.findViewById(R.id.delHours);
         date = view.findViewById(R.id.dateAlter);
         hours = view.findViewById(R.id.hoursAlter);
+        comment = view.findViewById(R.id.comment);
 
         btnAlter.setOnClickListener(view1 -> {
-            if(!(date.getText() == null) || !(hours.getText() == null)){
-                ((MainActivity) Objects.requireNonNull(getActivity())).alterHour(date.getText().toString(), hours.getText().toString());
+            if(!(hours.getText() == null)){
+                String dateString = ""+ date.getDayOfMonth()+"."+ (date.getMonth() + 1)+"."+date.getYear();
+                ((MainActivity) Objects.requireNonNull(getActivity())).alterHour(dateString, hours.getText().toString(), comment.getText().toString());
             }
             else{
                 Toast.makeText(getContext(), "Please enter date and Hours!", Toast.LENGTH_LONG).show();
@@ -44,12 +48,7 @@ public class AlterHoursFragment extends Fragment {
         });
 
         btnDelete.setOnClickListener(view1 -> {
-            if(!(date.getText() == null)){
-                ((MainActivity) Objects.requireNonNull(getActivity())).delHour(date.getText().toString());
-            }
-            else{
-                Toast.makeText(getContext(), "Please enter date!", Toast.LENGTH_LONG).show();
-            }
+                Toast.makeText(getContext(), "Deleting", Toast.LENGTH_LONG).show();
         });
 
         return view;

@@ -6,4 +6,5 @@
     <string name="insert_hours">Insert Hours</string>
     <string name="EditHours">Edit Hours</string>
     <string name="delHours">Delete Hours</string>
+    <string name="Comment">Comment</string>
 </resources>

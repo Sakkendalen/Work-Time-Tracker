@@ -3,7 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="2"
     tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/asd"
+        android:layout_toEndOf="@id/simpleCalendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/fetchedHours"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="100dp"
+            android:id="@+id/week1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/week2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/week3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/week4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_marginBottom="50dp"
+            android:id="@+id/week5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
 
     <!-- CalendarView with monday first day-->
     <CalendarView
@@ -18,9 +62,9 @@
 
     <TextView
         android:id="@+id/fetchedHours"
+        android:layout_below="@id/simpleCalendarView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/simpleCalendarView"
         android:layout_centerVertical="true" />
 
 

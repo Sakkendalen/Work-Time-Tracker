@@ -26,7 +26,11 @@ public class HoursCalendarFragment extends Fragment {
     private static final String TAG = "HoursCalendarFragment";
 
     private CalendarView simpleCalendarView;
-    private TextView fetchedHours;
+    private TextView week1;
+    private TextView week2;
+    private TextView week3;
+    private TextView week4;
+    private TextView week5;
 
 
     @Nullable
@@ -36,6 +40,12 @@ public class HoursCalendarFragment extends Fragment {
 
         simpleCalendarView = (CalendarView) view.findViewById(R.id.simpleCalendarView);    // get the reference of CalendarView
         simpleCalendarView.setDate(System.currentTimeMillis(),true,true);  // set date to today.
+        week1 = (TextView) view.findViewById(R.id.week1);
+        week2 = (TextView) view.findViewById(R.id.week2);
+        week3 = (TextView) view.findViewById(R.id.week3);
+        week4 = (TextView) view.findViewById(R.id.week4);
+        week5 = (TextView) view.findViewById(R.id.week5);
+
 
 
         // perform setOnDateChangeListener event on CalendarView.

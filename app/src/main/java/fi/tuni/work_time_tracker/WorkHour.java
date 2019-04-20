@@ -1,25 +1,25 @@
 package fi.tuni.work_time_tracker;
 
-import java.sql.Time;
-import java.util.Date;
-
 public class WorkHour {
 
     int _id;
     String _day;
     String _hours;
+    String _comment;
 
     public WorkHour(){   }
 
-    public WorkHour(int id, String date, String workHours){
+    public WorkHour(int id, String date, String workHours, String comment){
         this._id = id;
         this._day = date;
         this._hours = workHours;
+        this._comment = comment;
     }
 
-    public WorkHour(String date, String workHours){
+    public WorkHour(String date, String workHours, String comment){
         this._day = date;
         this._hours = workHours;
+        this._comment = comment;
     }
     public int getID(){
         return this._id;
@@ -43,5 +43,13 @@ public class WorkHour {
 
     public void setHours(String workHours){
         this._hours = workHours;
+    }
+
+    public String getComment() {
+        return _comment;
+    }
+
+    public void setComment(String _comment) {
+        this._comment = _comment;
     }
 }

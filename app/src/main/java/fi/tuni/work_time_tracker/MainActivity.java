@@ -1,26 +1,14 @@
 package fi.tuni.work_time_tracker;
 
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,8 +20,13 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private EditText hours;
-    private EditText date;
+
+    private EditText comment;
+
+    private DatePicker date;
+
     private DatabaseHandler db;
+
     private TextView fetchedHours;
 
     @Override
@@ -66,11 +59,14 @@ public class MainActivity extends AppCompatActivity {
     public void saveHours(View view) {
 
         hours = (EditText) findViewById(R.id.hours);
-        date = (EditText) findViewById(R.id.date);
+        comment = (EditText) findViewById(R.id.comment);
+        date = (DatePicker) findViewById(R.id.date);
+
+        String dateString = ""+ date.getDayOfMonth()+"."+ (date.getMonth() + 1)+"."+date.getYear();
 
         // Inserting WorkHour
-        Log.d("WorkHourDebug: ", "Inserting ..");
-        db.addWorkHours(new WorkHour(date.getText().toString(), hours.getText().toString()));
+        Log.d("WorkHourDebug: ", "Inserting:" + dateString +" "+ hours.getText().toString() +" "+ comment.getText().toString());
+        db.addWorkHours(new WorkHour(dateString, hours.getText().toString(), comment.getText().toString()));
     }
 
     public void delHour(String date){
@@ -86,15 +82,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void alterHour(String date, String hour){
+    public void alterHour(String date, String hour, String comment){
 
         List<WorkHour> contacts = db.getAllWorkHours();
 
         for (WorkHour cn : contacts) {
             if(cn.getDay().equals(date)) {
-                Log.d("Altering:", "Altering" + cn.getID() + " " + cn.getDay() + " " + cn.getHours() );
+                Log.d("Altering:", "Altering" + cn.getID() + " " + cn.getDay() + " " + cn.getHours() + " " + cn.getComment() );
                 cn.setDay(date);
                 cn.setHours(hour);
+                cn.setHours(comment);
                 db.updateWorkHour(cn);
             }
         }
