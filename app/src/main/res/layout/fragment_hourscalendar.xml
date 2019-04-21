@@ -62,10 +62,13 @@
 
     <TextView
         android:id="@+id/fetchedHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/simpleCalendarView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true" />
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="serif"
+        android:textSize="24sp" />
 
 
 </RelativeLayout>

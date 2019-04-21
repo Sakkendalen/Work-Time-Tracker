@@ -46,8 +46,6 @@ public class HoursCalendarFragment extends Fragment {
         week4 = (TextView) view.findViewById(R.id.week4);
         week5 = (TextView) view.findViewById(R.id.week5);
 
-
-
         // perform setOnDateChangeListener event on CalendarView.
         // clicking selected day fethces given date workhours sum.
         simpleCalendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {

@@ -34,7 +34,7 @@ public class AlterRowsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Alter Hours from " + dateString);
+            actionBar.setTitle("Edit Hours from " + dateString);
         }
     }
 
