@@ -41,24 +41,26 @@ public class AlterHoursFragment extends Fragment {
                 delHour();
             }
         });
-//        btnAlter.setOnClickListener(v -> alterHour());
+        btnAlter.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                alterHour();
+            }
+        });
 
         return view;
     }
 
     public void delHour() {
-        Intent myIntent = new Intent(getActivity(), deleteRowsActivity.class);
-        String dateString = "" + date.getDayOfMonth() +"."+ date.getMonth() +"."+ date.getYear();
+        Intent myIntent = new Intent(getActivity(), DeleteRowsActivity.class);
+        String dateString = "" + date.getDayOfMonth() +"."+ (date.getMonth() + 1) +"."+ date.getYear();
         myIntent.putExtra("date", dateString);
-        Log.d("Starting", "DeleteActivity.");
         startActivity(myIntent);
     }
-//
-//    public void alterHour() {
-//        Intent myIntent = new Intent(getActivity(), deleteRowsActivity.class);
-//        String dateString = ""+ date.getDayOfMonth()+"."+ (date.getMonth() + 1)+"."+date.getYear();
-//        myIntent.putExtra("date", dateString);
-//        Log.d("Starting", "DeleteActivity.");
-//        startActivity(myIntent);
-//    }
+
+    public void alterHour() {
+        Intent myIntent = new Intent(getActivity(), AlterRowsActivity.class);
+        String dateString = ""+ date.getDayOfMonth()+"."+ (date.getMonth() + 1)+"."+date.getYear();
+        myIntent.putExtra("date", dateString);
+        startActivity(myIntent);
+    }
 }

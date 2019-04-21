@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +107,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // code to get all WorkHour by date in a list view
     public List<WorkHour> getAllWorkhourByDate(String date) {
         List<WorkHour> workhourList = new ArrayList<WorkHour>();
-        // Select All Query
+        // Select All By date
         String q = "SELECT * FROM " + TABLE_WORKHOURS + "  WHERE day = '" + date + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -143,7 +145,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Deleting single WorkHour
-    public void deleteWorkHour(WorkHour workhour) {
+    void deleteWorkHour(WorkHour workhour) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_WORKHOURS, KEY_ID + " = ?",
                 new String[] { String.valueOf(workhour.getID()) });

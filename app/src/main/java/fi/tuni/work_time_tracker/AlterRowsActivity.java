@@ -11,12 +11,12 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteRowsActivity extends AppCompatActivity {
+public class AlterRowsActivity extends AppCompatActivity {
 
     ListView listView;
     List<WorkHour> hours=new ArrayList<>();
     private DatabaseHandler db;
-    CustomListAdapterDeleteRows deleteAdapter;
+    CustomListAdapterAlterRows alterAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +27,14 @@ public class DeleteRowsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delete_rows);
 
         hours = db.getAllWorkhourByDate(dateString);
-        deleteAdapter = new CustomListAdapterDeleteRows(this, hours, db);
+        alterAdapter = new CustomListAdapterAlterRows(this, hours, db);
         listView = (ListView) findViewById(R.id.listviewdeleteID);
-        listView.setAdapter(deleteAdapter);
+        listView.setAdapter(alterAdapter);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Delete Hours from " + dateString);
+            actionBar.setTitle("Alter Hours from " + dateString);
         }
     }
 

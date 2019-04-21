@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
+    <EditText
         android:id="@+id/textView1"
         android:layout_width="95dp"
         android:layout_height="match_parent"
@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:text="TextView" />
 
-    <TextView
+    <EditText
         android:id="@+id/textView2"
         android:layout_width="83dp"
         android:layout_height="match_parent"
@@ -23,7 +23,7 @@
         android:layout_weight="1"
         android:text="TextView" />
 
-    <TextView
+    <EditText
         android:id="@+id/textView3"
         android:layout_width="82dp"
         android:layout_height="match_parent"
@@ -37,6 +37,6 @@
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Del" />
+        android:text="alter" />
 
 </LinearLayout>
