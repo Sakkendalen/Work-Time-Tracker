@@ -72,6 +72,20 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Workhour added to date " +dateString, Toast.LENGTH_LONG).show();
     }
 
+//    public void delHour(String date) {
+//        Intent myIntent = new Intent(this, deleteRowsActivity.class);
+//        myIntent.putExtra("date", date);
+//        Log.d("Starting", "DeleteActivity.");
+//        startActivity(myIntent);
+//    }
+//
+//    public void alterHour(String date) {
+//        Intent myIntent = new Intent(this, deleteRowsActivity.class);
+//        myIntent.putExtra("date", date);
+//        Log.d("Starting", "AlterActivity.");
+//        startActivity(myIntent);
+//    }
+
 //    public void delHour(String date){
 //
 //        List<WorkHour> contacts = db.getAllWorkHours();
@@ -84,22 +98,22 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //    }
-
-    public void alterHour(String date, String hour, String comment){
-
-        List<WorkHour> contacts = db.getAllWorkHours();
-
-        for (WorkHour cn : contacts) {
-            if(cn.getDay().equals(date)) {
-                Log.d("Altering:", "Altering" + cn.getID() + " " + cn.getDay() + " " + cn.getHours() + " " + cn.getComment() );
-                cn.setDay(date);
-                cn.setHours(hour);
-                cn.setHours(comment);
-                db.updateWorkHour(cn);
-            }
-        }
-
-    }
+//
+//    public void alterHour(String date, String hour, String comment){
+//
+//        List<WorkHour> contacts = db.getAllWorkHours();
+//
+//        for (WorkHour cn : contacts) {
+//            if(cn.getDay().equals(date)) {
+//                Log.d("Altering:", "Altering" + cn.getID() + " " + cn.getDay() + " " + cn.getHours() + " " + cn.getComment() );
+//                cn.setDay(date);
+//                cn.setHours(hour);
+//                cn.setHours(comment);
+//                db.updateWorkHour(cn);
+//            }
+//        }
+//
+//    }
 
     public void fetchHours(String date){
 

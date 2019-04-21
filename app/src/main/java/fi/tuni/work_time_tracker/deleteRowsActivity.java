@@ -16,15 +16,18 @@ import java.util.Objects;
 public class deleteRowsActivity extends AppCompatActivity {
 
     ListView listView;
-    List<WorkHour> users=new ArrayList<>();
-    static DatabaseHandler dbHandler;
+    List<WorkHour> hours=new ArrayList<>();
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = new DatabaseHandler(this);
         setContentView(R.layout.activity_delete_rows);
-        users = dbHandler.getAllWorkhourByDate(Objects.requireNonNull(getIntent().getExtras()).getString("date"));
-        listView = (ListView) findViewById(R.id.listviewdeleteID);
+        if(getIntent().getExtras() != null) {
+            hours = db.getAllWorkhourByDate(Objects.requireNonNull(getIntent().getExtras()).getString("date"));
+            listView = (ListView) findViewById(R.id.listviewdeleteID);
+        }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
