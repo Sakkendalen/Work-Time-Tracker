@@ -57,8 +57,14 @@ public class CustomListAdapterAlterRows extends BaseAdapter {
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                db.addWorkHours(hour);
-                hours.remove(i);
+                mtextView1.setText(mtextView1.getText());
+                mtextView2.setText(mtextView2.getText());
+                mtextView3.setText(mtextView3.getText());
+                hour.setDay(mtextView1.getText().toString());
+                hour.setHours(mtextView2.getText().toString());
+                hour.setComment(mtextView3.getText().toString());
+
+                db.updateWorkHour(hour);
                 notifyDataSetChanged();
             }
         });

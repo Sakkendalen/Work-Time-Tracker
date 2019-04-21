@@ -37,6 +37,6 @@
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="alter" />
+        android:text="Edit" />
 
 </LinearLayout>
