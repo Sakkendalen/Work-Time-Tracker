@@ -49,15 +49,10 @@ public class HoursCalendarFragment extends Fragment {
 
 
         // perform setOnDateChangeListener event on CalendarView.
+        // clicking selected day fethces given date workhours sum.
         simpleCalendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
-
             String date = "" + dayOfMonth + "." + (month + 1) + "." + year;
-
             ((MainActivity) Objects.requireNonNull(getActivity())).fetchHours(date);
-
-            // display the selected date by using a toast
-            // for some reason month is 1 behind, Jan -> 0, Feb -> 1 etc....
-            Toast.makeText(getContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
         });
 
         return view;

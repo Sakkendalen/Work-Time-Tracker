@@ -20,37 +20,6 @@
         android:calendarViewShown="false"
         android:layout_gravity="center"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:text="@string/insert_hours" />
-
-    <EditText
-        android:id="@+id/hoursAlter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="time" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:text="@string/Comment" />
-
-    <EditText
-        android:id="@+id/comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="text" />
 
     <Button
         android:id="@+id/alterBtn"
@@ -66,6 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:text="@string/delHours" />
+        android:text="@string/delHours"/>
 
 </LinearLayout>

@@ -45,7 +45,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // code to add the new WorkHours
-    void addWorkHours(WorkHour workhour) {
+    public void addWorkHours(WorkHour workhour) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         //HOX! HOX! TRY TO CHANGE THESE TO DATE AND TIME FORMAT! WORKHOUR RETURNS STRING!
@@ -61,7 +61,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // code to get the single WorkHour
-    WorkHour getWorkhour(int id) {
+    public WorkHour getWorkhour(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_WORKHOURS, new String[] { KEY_ID,
@@ -84,6 +84,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                WorkHour workhour = new WorkHour();
+                workhour.setID(Integer.parseInt(cursor.getString(0)));
+                workhour.setDay(cursor.getString(1));
+                workhour.setHours(cursor.getString(2));
+                workhour.setComment(cursor.getString(3));
+                // Adding WorkHour to list
+                workhourList.add(workhour);
+            } while (cursor.moveToNext());
+        }
+
+        // return WorkHour list
+        return workhourList;
+    }
+
+    // code to get all WorkHour by date in a list view
+    public List<WorkHour> getAllWorkhourByDate(String date) {
+        List<WorkHour> workhourList = new ArrayList<WorkHour>();
+        // Select All Query
+        String q = "SELECT * FROM " + TABLE_WORKHOURS + "  WHERE day = '" + date + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(q, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

@@ -1,8 +1,10 @@
 package fi.tuni.work_time_tracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -23,8 +26,6 @@ public class AlterHoursFragment extends Fragment {
     private Button btnAlter;
     private Button btnDelete;
     private DatePicker date;
-    private EditText hours;
-    private EditText comment;
 
     @Nullable
     @Override
@@ -33,24 +34,23 @@ public class AlterHoursFragment extends Fragment {
 
         btnAlter = view.findViewById(R.id.alterBtn);
         btnDelete = view.findViewById(R.id.delHours);
-        date = view.findViewById(R.id.dateAlter);
-        hours = view.findViewById(R.id.hoursAlter);
-        comment = view.findViewById(R.id.comment);
+        date = (DatePicker) view.findViewById(R.id.dateAlter);
 
-        btnAlter.setOnClickListener(view1 -> {
-            if(!(hours.getText() == null)){
-                String dateString = ""+ date.getDayOfMonth()+"."+ (date.getMonth() + 1)+"."+date.getYear();
-                ((MainActivity) Objects.requireNonNull(getActivity())).alterHour(dateString, hours.getText().toString(), comment.getText().toString());
-            }
-            else{
-                Toast.makeText(getContext(), "Please enter date and Hours!", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnDelete.setOnClickListener(view1 -> {
-                Toast.makeText(getContext(), "Deleting", Toast.LENGTH_LONG).show();
-        });
+        btnDelete.setOnClickListener(v -> delHour());
 
         return view;
+    }
+
+    public void delHour() {
+        Intent myIntent = new Intent(getActivity(), deleteRowsActivity.class);
+        String dateString = ""+ date.getDayOfMonth()+"."+ (date.getMonth() + 1)+"."+date.getYear();
+        myIntent.putExtra("date", dateString);
+        Log.d("Starting", "DeleteActivity.");
+        startActivity(myIntent);
+    }
+
+    public void alterHour(String date) {
+        Intent myIntent = new Intent(getActivity(), deleteRowsActivity.class);
+        startActivity(myIntent);
     }
 }
