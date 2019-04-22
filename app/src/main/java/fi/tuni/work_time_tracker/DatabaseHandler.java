@@ -6,11 +6,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DatabaseHandler class handles given data of object Workhour and
+ * saves, deletes or updates rows in SQLiteDatabase.
+ *
+ * @author      Saku Tynjala saku.tynjala@tuni.fi
+ * @version     0.3
+ * @since       0.1
+ */
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -22,47 +29,66 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_HOURS = "hours";
     private static final String KEY_COMMENT = "comment";
 
+    /**
+     * Constructor method.
+     *
+     * @param context to casted at super method.
+     */
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //3rd argument to be passed is CursorFactory instance
     }
 
-    // Creating Tables
+    /**
+     * Called when the database is created for the first time.
+     *
+     * @param db The database.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_WORKHOURS_TABLE = "CREATE TABLE " + TABLE_WORKHOURS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DAY + " TEXT,"
-                + KEY_HOURS + " TEXT," + KEY_COMMENT + " TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DAY + "TEXT,"
+                + KEY_HOURS + "TEXT," + KEY_COMMENT + "TEXT" + ")";
         db.execSQL(CREATE_WORKHOURS_TABLE);
     }
 
-    // Upgrading database
+    /**
+     * Called when the database needs to be upgraded.
+     *
+     * @param db The database.
+     * @param oldVersion The old database version.
+     * @param newVersion The new database version.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKHOURS);
 
-        // Create tables again
         onCreate(db);
     }
 
-    // code to add the new WorkHours
+    /**
+     * Method for saving Workhour to database.
+     *
+     * @param workhour object Workhour to be saved.
+     */
     public void addWorkHours(WorkHour workhour) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //HOX! HOX! TRY TO CHANGE THESE TO DATE AND TIME FORMAT! WORKHOUR RETURNS STRING!
         ContentValues values = new ContentValues();
-        values.put(KEY_DAY, workhour.getDay()); // WorkHour Day
-        values.put(KEY_HOURS, workhour.getHours()); // WorkHour Hour
-        values.put(KEY_COMMENT, workhour.getComment()); //workHour Comment
+        values.put(KEY_DAY, workhour.getDay());
+        values.put(KEY_HOURS, workhour.getHours());
+        values.put(KEY_COMMENT, workhour.getComment());
 
-        // Inserting Row
         db.insert(TABLE_WORKHOURS, null, values);
-        //2nd argument is String containing nullColumnHack
-        db.close(); // Closing database connection
+        db.close();
     }
 
-    // code to get the single WorkHour
+    /**
+     * Method for getting single row from database
+     *
+     * @param id ID of fetched Workhour.
+     *
+     * @return fetched Workhour.
+     */
     public WorkHour getWorkhour(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -74,20 +100,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         WorkHour workhour = new WorkHour(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3));
-        // return WorkHour
+
         return workhour;
     }
 
-    // code to get all WorkHour in a list view
+    /**
+     * Method for getting all rows from table.
+     *
+     * @return List of Workhour objects.
+     */
     public List<WorkHour> getAllWorkHours() {
         List<WorkHour> workhourList = new ArrayList<WorkHour>();
-        // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_WORKHOURS;
 
         SQLiteDatabase db = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 WorkHour workhour = new WorkHour();
@@ -95,25 +123,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 workhour.setDay(cursor.getString(1));
                 workhour.setHours(cursor.getString(2));
                 workhour.setComment(cursor.getString(3));
-                // Adding WorkHour to list
                 workhourList.add(workhour);
             } while (cursor.moveToNext());
         }
 
-        // return WorkHour list
         return workhourList;
     }
 
-    // code to get all WorkHour by date in a list view
+    /**
+     * Method for getting all rows by given date parameter.
+     *
+     * @param date of Workhour
+     *
+     * @return List of Workhour objects.
+     */
     public List<WorkHour> getAllWorkhourByDate(String date) {
         List<WorkHour> workhourList = new ArrayList<WorkHour>();
-        // Select All By date
         String q = "SELECT * FROM " + TABLE_WORKHOURS + "  WHERE day = '" + date + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(q, null);
 
-        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 WorkHour workhour = new WorkHour();
@@ -121,15 +151,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 workhour.setDay(cursor.getString(1));
                 workhour.setHours(cursor.getString(2));
                 workhour.setComment(cursor.getString(3));
-                // Adding WorkHour to list
                 workhourList.add(workhour);
             } while (cursor.moveToNext());
         }
-
-        // return WorkHour list
         return workhourList;
     }
 
+    /**
+     * Method for updating row in database
+     *
+     * @param workhour updated Object Workhour.
+     *
+     * @return int of updated Object ID.
+     */
     // code to update the single WorkHour
     public int updateWorkHour(WorkHour workhour) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -139,11 +173,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_HOURS, workhour.getHours());
         values.put(KEY_COMMENT, workhour.getComment());
 
-        // updating row
         return db.update(TABLE_WORKHOURS, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(workhour.getID()) });
     }
 
+    /**
+     * Method for deleting row from database.
+     *
+     * @param workhour object which is wanted to be deleted.
+     */
     // Deleting single WorkHour
     void deleteWorkHour(WorkHour workhour) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -152,14 +190,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Getting WorkHours Count
+    /**
+     * Method to get count of rows in database
+     *
+     * @return int of rows count.
+     */
     public int getWorkHoursCount() {
         String countQuery = "SELECT  * FROM " + TABLE_WORKHOURS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
 
-        // return count
         return cursor.getCount();
     }
 

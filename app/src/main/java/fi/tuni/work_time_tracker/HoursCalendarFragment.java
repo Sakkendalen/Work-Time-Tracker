@@ -1,24 +1,24 @@
 package fi.tuni.work_time_tracker;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by
+ * Fragment class to build tab Hours in application GUI
+ * and add Calendar setOnDateChangeListener.
+ *
+ * Extends from Fragment.
+ *
+ * @author      Saku Tynjala saku.tynjala@tuni.fi
+ * @version     0.3
+ * @since       0.2
  */
 
 public class HoursCalendarFragment extends Fragment {
@@ -33,6 +33,19 @@ public class HoursCalendarFragment extends Fragment {
     private TextView week5;
 
 
+    /**
+     * Inflates View and add xml layout fragment_hourscalendar to view.
+     *
+     * Assigns simpleCalendarView today as date to be chosen and creates
+     * OnDateChangleListener which fetches that day sum of inserted Workhour hours data
+     * from database.
+     *
+     * @param inflater to inflate view with container and layout.
+     * @param container nullable Viewgroup.
+     * @param savedInstanceState nullable Bundle.
+     *
+     * @return View of xml file.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

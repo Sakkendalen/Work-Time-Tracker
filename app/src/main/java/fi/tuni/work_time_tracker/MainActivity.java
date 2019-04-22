@@ -1,11 +1,9 @@
 package fi.tuni.work_time_tracker;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -13,6 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+
+/**
+ * Main Class for starting Application and using other classes for
+ * saving, deleting and editing workhours, Setting up Framgents to
+ * UI.
+ *
+ * @author      Saku Tynjala saku.tynjala@tuni.fi
+ * @version     0.3
+ * @since       0.1
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,11 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView fetchedHours;
 
+    /**
+     * onCreate Method to Override super Method and define fxml file of layout,
+     * Defining SectionsPageAdapter and Databasehandler to application.
+     *
+     * @param savedInstanceState Bundle, passed to super method.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: Starting.");
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
@@ -51,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
+    /**
+     * Method for Fragment setup for container.
+     * Initializes and adds fragments InsertHoursFragment,
+     * HoursCalendarFarment and AlterHoursFragment to viewPager.
+     *
+     * @param viewPager used in conjunction with Fragment.
+     */
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new InsertHoursFragment(), "Insert");
@@ -59,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * Method for saving Workhour and passing it to Databasehandler to be saved in
+     * database.
+     *
+     * @param view of fetching component of view. Not used.
+     */
     public void saveHours(View view) {
 
         hours = (EditText) findViewById(R.id.hours);
@@ -72,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Workhour added to date " +dateString, Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Method for Fetching Sum of Workhours hours data from database and showing it to
+     * user by given date.
+     *
+     * @param date Wanted day Workhours.
+     */
     public void fetchHours(String date){
 
         fetchedHours = (TextView) findViewById(R.id.fetchedHours);
@@ -92,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
         fetchedHours.append(show);
     }
 
+    /**
+     * Method for getting Application Databasehandler.
+     *
+     * @return DatabaseHandler of application
+     */
     public static DatabaseHandler getDb(){
         return db;
     }
