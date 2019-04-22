@@ -21,9 +21,9 @@ import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "WorkHourManager";
-    private static final String TABLE_WORKHOURS = "WorkHours";
+    private static final String TABLE_WORKHOUR = "WorkHour";
     private static final String KEY_ID = "id";
     private static final String KEY_DAY = "day";
     private static final String KEY_HOURS = "hours";
@@ -45,10 +45,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_WORKHOURS_TABLE = "CREATE TABLE " + TABLE_WORKHOURS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DAY + "TEXT,"
-                + KEY_HOURS + "TEXT," + KEY_COMMENT + "TEXT" + ")";
-        db.execSQL(CREATE_WORKHOURS_TABLE);
+
+        db.execSQL("CREATE TABLE " + TABLE_WORKHOUR + "("
+                + KEY_ID + "  INTEGER PRIMARY KEY, "
+                + KEY_DAY + " TEXT, "
+                + KEY_HOURS + " TEXT, "
+                + KEY_COMMENT + " TEXT);"
+        );
     }
 
     /**
@@ -60,7 +63,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKHOURS);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKHOUR);
 
         onCreate(db);
     }
@@ -78,7 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_HOURS, workhour.getHours());
         values.put(KEY_COMMENT, workhour.getComment());
 
-        db.insert(TABLE_WORKHOURS, null, values);
+        db.insert(TABLE_WORKHOUR, null, values);
         db.close();
     }
 
@@ -92,7 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public WorkHour getWorkhour(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_WORKHOURS, new String[] { KEY_ID,
+        Cursor cursor = db.query(TABLE_WORKHOUR, new String[] { KEY_ID,
                         KEY_DAY, KEY_HOURS, KEY_COMMENT }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
@@ -111,7 +115,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     public List<WorkHour> getAllWorkHours() {
         List<WorkHour> workhourList = new ArrayList<WorkHour>();
-        String selectQuery = "SELECT  * FROM " + TABLE_WORKHOURS;
+        String selectQuery = "SELECT  * FROM " + TABLE_WORKHOUR;
 
         SQLiteDatabase db = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
@@ -139,7 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     public List<WorkHour> getAllWorkhourByDate(String date) {
         List<WorkHour> workhourList = new ArrayList<WorkHour>();
-        String q = "SELECT * FROM " + TABLE_WORKHOURS + "  WHERE day = '" + date + "'";
+        String q = "SELECT * FROM " + TABLE_WORKHOUR + "  WHERE day = '" + date + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(q, null);
@@ -173,7 +177,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_HOURS, workhour.getHours());
         values.put(KEY_COMMENT, workhour.getComment());
 
-        return db.update(TABLE_WORKHOURS, values, KEY_ID + " = ?",
+        return db.update(TABLE_WORKHOUR, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(workhour.getID()) });
     }
 
@@ -185,7 +189,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Deleting single WorkHour
     void deleteWorkHour(WorkHour workhour) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_WORKHOURS, KEY_ID + " = ?",
+        db.delete(TABLE_WORKHOUR, KEY_ID + " = ?",
                 new String[] { String.valueOf(workhour.getID()) });
         db.close();
     }
@@ -196,7 +200,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @return int of rows count.
      */
     public int getWorkHoursCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_WORKHOURS;
+        String countQuery = "SELECT  * FROM " + TABLE_WORKHOUR;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
