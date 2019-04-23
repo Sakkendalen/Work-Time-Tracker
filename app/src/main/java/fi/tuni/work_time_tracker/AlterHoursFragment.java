@@ -20,7 +20,6 @@ import android.widget.DatePicker;
  * @version     0.3
  * @since       0.2
  */
-
 public class AlterHoursFragment extends Fragment {
     private static final String TAG = "Tab3Fragment";
 
@@ -69,7 +68,6 @@ public class AlterHoursFragment extends Fragment {
      *
      * Puts given date to Intent extra which can be used from DeleteRowsActivity.
      */
-
     public void delHour() {
         Intent myIntent = new Intent(getActivity(), DeleteRowsActivity.class);
         String dateString = "" + date.getDayOfMonth() +"."+ (date.getMonth() + 1) +"."+ date.getYear();
