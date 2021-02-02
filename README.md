@@ -22,23 +22,23 @@ Application where user can insert work hours and it saves them to local database
 
 * Saving Hours
 
-![Saving Hours]()
+![Saving Hours](https://github.com/Sakkendalen/Work-Time-Tracker/blob/master/img/1.png)
 
 * Viewing Hours
 
-![Viewing Hours]()
+![Viewing Hours](https://github.com/Sakkendalen/Work-Time-Tracker/blob/master/img/2.png)
 
 * Edit or delete hours view
 
-![Edit or delete hours view]()
+![Edit or delete hours view](https://github.com/Sakkendalen/Work-Time-Tracker/blob/master/img/3.png)
 
 * Edit hours view
 
-![Edit hours view]()
+![Edit hours view](https://github.com/Sakkendalen/Work-Time-Tracker/blob/master/img/4.png)
 
 * Delete hours view
 
-![Delete hours view]()
+![Delete hours view](https://github.com/Sakkendalen/Work-Time-Tracker/blob/master/img/5.png)
 
 ## Status
 
